@@ -34,4 +34,4 @@ It should look something like this:
 ![](images/11.png)
 12. Merge he pull request to update.
 
-13. Explore the depth of configuration available at <https://docs.renovatebot.com/configuration-options/> at your own leisure.
+13. The configuration can be found in  renovate.json, explore the depths of configuration available at <https://docs.renovatebot.com/configuration-options/> at your own leisure.
