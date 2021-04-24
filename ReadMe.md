@@ -112,29 +112,6 @@ Next, we'll break the config on purpuse by trying to set up automerge fo minor u
 }
 
 ```
-19. Check the issue again and see that the bot have closed it automatically. We will check that the config actually works by manually downgrading express.
-20. Open package.json and downgrade exporess to 4.17.0, the file should look like this: 
+19. Check the issue again and see that the bot have closed it automatically. 
 
-```
-{
-  "dependencies": {
-    "express": "4.17.0",
-    "node": "16.0.0",
-    "react": "17.0.2"
-  },
-  "name": "nodeexample",
-  "version": "1.0.0",
-  "description": "Test for tut",
-  "main": "app.js",
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Sebastian Fagerlind",
-  "license": "ISC"
-}
-
-```
-22. 
-
-13. The configuration can be found in  renovate.json, explore the depths of configuration available at <https://docs.renovatebot.com/configuration-options/> at your own leisure.
+20. The configuration can be found in  renovate.json, explore the depths of configuration available at <https://docs.renovatebot.com/configuration-options/> at your own leisure.
