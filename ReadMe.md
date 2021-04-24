@@ -1,8 +1,9 @@
 # Executable Renovate-tutorial
 
-## Intro
-Renovate is a Dependency Manager. It's main use is to monitor all dependencies in a project and automatically update them according to your chosen preferences. Renovate supports a wealth of languages and is highly customizable.
-This tutorial is only meant to be an introduction, not an exhaustive resource on everything that's possible with Renovate.
+## Introduction
+Renovate is a dependency manager and its main use is to monitor all dependencies in a project and automatically update them according to your chosen preferences. For instance, Renovate bot will automatically crate pull requests whenever dependencies need updating. Renovate supports a wealth of languages and is highly customizable. There are multiple options on how to set up and use Renovate. It is easily available if you are hosted at Github or Azure DevOps. For platforms such as Bitbucket Cloud, Bitbucket Server, Gitea and GitLab, Renovate can be used by self-hosting it.
+
+This tutorial will provide a breif introduction to the tool and how to set up Renovate bot for a simple node web application hosted at Github.
 
 ## Preparation
 To complete this tutorial you will only need a Github account and a web-browser.
