@@ -42,7 +42,21 @@ It should look something like this:
 ```
 {
   "extends": [
-    "config:base",
+    ":separateMajorReleases",
+    ":combinePatchMinorReleases",
+    ":ignoreUnstable",
+    ":prImmediately",
+    ":semanticPrefixFixDepsChoreOthers",
+    ":updateNotScheduled",
+    ":ignoreModulesAndTests",
+    ":autodetectPinVersions",
+    ":prHourlyLimitNone",
+    ":prConcurrentLimitNone",
+    "group:monorepos",
+    "group:recommended",
+    "helpers:disableTypesNodeMajor",
+    "workarounds:all",
+    
     ":pinAllExceptPeerDependencies"
   ]
 }
@@ -57,7 +71,7 @@ This will configure rennovate to pin all dependacy versions exept peer dependaci
 
 17. Merge the pull rquest and check that all versions have been pinned.
 
-Next, we'll break the config on purpuse by trying to set up automerge fo minor updates.
+Next, we'll break the config on purpuse while setting up automerge fo minor updates.
 
 18. Overwrite the renovate.json with the following: 
 
@@ -65,8 +79,23 @@ Next, we'll break the config on purpuse by trying to set up automerge fo minor u
 ```
 {
   "extends": [
-    "config:base",
+    ":separateMajorReleases",
+    ":combinePatchMinorReleases",
+    ":ignoreUnstable",
+    ":prImmediately",
+    ":semanticPrefixFixDepsChoreOthers",
+    ":updateNotScheduled",
+    ":ignoreModulesAndTests",
+    ":autodetectPinVersions",
+    ":prHourlyLimitNone",
+    ":prConcurrentLimitNone",
+    "group:monorepos",
+    "group:recommended",
+    "helpers:disableTypesNodeMajor",
+    "workarounds:all",
+    
     ":pinAllExceptPeerDependencies",
+
     "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
@@ -75,6 +104,7 @@ Next, we'll break the config on purpuse by trying to set up automerge fo minor u
     }
   ]
   ]
+    
   
 }
 ```
@@ -97,8 +127,8 @@ Next, we'll break the config on purpuse by trying to set up automerge fo minor u
     ":updateNotScheduled",
     ":ignoreModulesAndTests",
     ":autodetectPinVersions",
-    ":prHourlyLimit2",
-    ":prConcurrentLimit20",
+    ":prHourlyLimitNone",
+    ":prConcurrentLimitNone",
     "group:monorepos",
     "group:recommended",
     "helpers:disableTypesNodeMajor",
@@ -117,4 +147,30 @@ Next, we'll break the config on purpuse by trying to set up automerge fo minor u
 ```
 19. Check the issue again and see that the bot have closed it automatically. 
 
-20. The configuration can be found in  renovate.json, explore the depths of configuration available at <https://docs.renovatebot.com/configuration-options/> at your own leisure.
+20. Open package.json and change the version of express to 4.17.0, the file should look something like this:
+
+```
+
+{
+  "dependencies": {
+    "express": "4.17.0",
+    "node": "16.0.0",
+    "react": "17.0.2"
+  },
+  "name": "nodeexample",
+  "version": "1.0.0",
+  "description": "Test for tut",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sebastian Fagerlind",
+  "license": "ISC"
+}
+```
+21. Wait a couple of minutes and check your closed pull requests and you will see that a pull request have been both created and merged automatically.
+
+![](images/22.png)
+
+23. The configuration can be found in  renovate.json, explore the depths of configuration available at <https://docs.renovatebot.com/configuration-options/> at your own leisure.
