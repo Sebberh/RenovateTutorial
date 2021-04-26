@@ -109,7 +109,7 @@ Next, we'll break the config on purpuse while setting up automerge fo minor upda
 }
 ```
 
-19. Check your Issues and see that Renovate have created an issue stating that the config is broken, including an error-message. It should look something like this:
+17. Check your Issues and see that Renovate have created an issue stating that the config is broken, including an error-message. It should look something like this:
 ![](images/19.png)
 
 
@@ -147,7 +147,7 @@ Next, we'll break the config on purpuse while setting up automerge fo minor upda
 ```
 19. Check the issue again and see that the bot have closed it automatically. 
 
-20. Open package.json and change the version of express to 4.17.0, the file should look something like this:
+20. Open package.json and change the version of express to 4.17.0. The file should look something like this:
 
 ```
 
@@ -173,4 +173,4 @@ Next, we'll break the config on purpuse while setting up automerge fo minor upda
 
 ![](images/22.png)
 
-23. The configuration can be found in  renovate.json, explore the depths of configuration available at <https://docs.renovatebot.com/configuration-options/> at your own leisure.
+23. Explore the depths of configuration available at <https://docs.renovatebot.com/configuration-options/> at your own leisure.
