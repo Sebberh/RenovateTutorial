@@ -69,6 +69,7 @@ Next, we'll break the config on purpuse by trying to set up automerge fo minor u
     "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "requiredStatusChecks": null,
       "automerge": true
     }
   ]
@@ -106,6 +107,7 @@ Next, we'll break the config on purpuse by trying to set up automerge fo minor u
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "requiredStatusChecks": null,
       "automerge": true
     }
   ]
