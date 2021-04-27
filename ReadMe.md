@@ -1,9 +1,9 @@
 # Executable Renovate-tutorial
 
 ## Introduction
-Renovate is a dependency manager and its main use is to monitor all dependencies in a project and automatically update them according to your chosen preferences. For instance, Renovate bot will automatically crate pull requests whenever dependencies need updating. Renovate supports a wealth of languages and is highly customizable. There are multiple options on how to set up and use Renovate. It is easily available if you are hosted at Github or Azure DevOps. For platforms such as Bitbucket Cloud, Bitbucket Server, Gitea and GitLab, Renovate can be used by self-hosting it.
+Renovate is a dependency manager and its main use is to monitor all dependencies in a project and automatically update them according to your chosen preferences. For instance, Renovate bot will automatically create pull requests whenever dependencies need updating. Renovate supports a wealth of languages and is highly customizable. There are multiple options on how to set up and use Renovate. It is easily available if you are hosted at Github or Azure DevOps. For platforms such as Bitbucket Cloud, Bitbucket Server, Gitea and GitLab, Renovate can be used by self-hosting it.
 
-This tutorial will provide a breif introduction to the tool and how to set up Renovate bot for a simple node web application hosted at Github.
+This tutorial will provide a brief introduction to the tool and how to set up Renovate bot for a simple node web application hosted at Github.
 
 ## Preparation
 To complete this tutorial you will only need a Github account and a web-browser.
@@ -16,7 +16,7 @@ To complete this tutorial you will only need a Github account and a web-browser.
 
 3. Navigate to <https://github.com/apps/renovate> and click the Install button
 ![](images/3.png)
-4. Set repository to either "All repositories" or just select the fork.
+4. Set the repository to either "All repositories" or just select the fork.
 ![](images/4.png)
 5. Click Install
 6. Click Activate now and sign in with Github
@@ -57,11 +57,11 @@ It should look something like this:
   ]
 }
 ```
-This configuration is eqvivalent to the defaults with four exeptions:
+This configuration is equivalent to the defaults with four exceptions:
   - No limit on how many pull requests are created per per hour.
-  - No limit on how many pull requests are created concurrantly.
+  - No limit on how many pull requests are created concurrently.
   - Does not disable automerge for the entire repository.
-  - Pins all dependacy versions exept peer dependacies.
+  - Pins all dependency versions except peer dependencies.
 
 This is to make ther tutorial run more smoothly. Pull requests will be made before any changes are made to the codebase.
 
@@ -70,11 +70,11 @@ This is to make ther tutorial run more smoothly. Pull requests will be made befo
 14. Open the pull request, it should look something like this:
 ![](images/16.png)
 
-15. Merge the pull rquest and check that all versions have been pinned.
+15. Merge the pull request and check that all versions have been pinned.
 
-Next, we'll break the config on purpuse while setting up automerge fo minor updates.
+Next, we'll break the config on purpose while setting up auto merge for minor updates.
 
-16. Overwrite the renovate.json with the following: 
+16. Overwrite the renovate.json with the following:
 
 
 ```
@@ -106,7 +106,7 @@ Next, we'll break the config on purpuse while setting up automerge fo minor upda
   ]
   ]
     
-  
+ 
 }
 ```
 
@@ -114,7 +114,7 @@ Next, we'll break the config on purpuse while setting up automerge fo minor upda
 ![](images/19.png)
 
 
-18. Overwrite the renovate.json again with the following: 
+18. Overwrite the renovate.json again with the following:
 
 
 ```
@@ -146,7 +146,7 @@ Next, we'll break the config on purpuse while setting up automerge fo minor upda
 }
 
 ```
-19. Check the issue again and see that the bot have closed it automatically. 
+19. Check the issue again and see that the bot has closed it automatically.
 
 20. Open package.json and change the version of express to 4.17.0. The file should look something like this:
 
@@ -170,8 +170,10 @@ Next, we'll break the config on purpuse while setting up automerge fo minor upda
   "license": "ISC"
 }
 ```
-21. Wait a couple of minutes and check your closed pull requests and you will see that a pull request have been both created and merged automatically.
+21. Wait a couple of minutes and check your closed pull requests and you will see that a pull request has been both created and merged automatically.
 
 ![](images/22.png)
 
 22. Explore the depths of configuration available at <https://docs.renovatebot.com/configuration-options/> at your own leisure.
+
+
