@@ -31,13 +31,9 @@ It should look something like this:
 
 10. Merge the pull request to enable Renovate on your Fork
 
-11. Check the list of pull request again to find an automatically created pull request updating the version of node in the project.
-![](images/11.png)
-12. Merge the pull request to update.
+11. Navigate to the project-files and open renovate.json.
 
-13. Navigate to the project-files and open renovate.json.
-
-14. Overwrite the content with the following:
+12. Overwrite the content with the following:
 
 ```
 {
@@ -61,19 +57,24 @@ It should look something like this:
   ]
 }
 ```
+This configuration is eqvivalent to the defaults with four exeptions:
+  - No limit on how many pull requests are created per per hour.
+  - No limit on how many pull requests are created concurrantly.
+  - Does not disable automerge for the entire repository.
+  - Pins all dependacy versions exept peer dependacies.
 
-This will configure rennovate to pin all dependacy versions exept peer dependacies. It will create a pull request before any change is made to the codebase.
+This is to make ther tutorial run more smoothly. Pull requests will be made before any changes are made to the codebase.
 
-15. Wait for a couple of minutes and the check your pull requests for a request named "Pin dependencies"
+13. Wait for a couple of minutes and the check your pull requests for a request named "Pin dependencies"
 
-16. Open the pull request, it should look something like this:
+14. Open the pull request, it should look something like this:
 ![](images/16.png)
 
-17. Merge the pull rquest and check that all versions have been pinned.
+15. Merge the pull rquest and check that all versions have been pinned.
 
 Next, we'll break the config on purpuse while setting up automerge fo minor updates.
 
-18. Overwrite the renovate.json with the following: 
+16. Overwrite the renovate.json with the following: 
 
 
 ```
@@ -173,4 +174,4 @@ Next, we'll break the config on purpuse while setting up automerge fo minor upda
 
 ![](images/22.png)
 
-23. Explore the depths of configuration available at <https://docs.renovatebot.com/configuration-options/> at your own leisure.
+22. Explore the depths of configuration available at <https://docs.renovatebot.com/configuration-options/> at your own leisure.
