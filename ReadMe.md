@@ -1,7 +1,7 @@
 # Executable Renovate-tutorial
 
 ## Introduction
-Renovate is a dependency manager and its main use is to monitor all dependencies in a project and automatically update them according to your chosen preferences. For instance, Renovate bot will automatically create pull requests whenever dependencies need updating. Renovate supports a wealth of languages and is highly customizable. There are multiple options on how to set up and use Renovate. It is easily available if you are hosted at Github or Azure DevOps. For platforms such as Bitbucket Cloud, Bitbucket Server, Gitea and GitLab, Renovate can be used by self-hosting it. [Dependabot](https://dependabot.com/) is another dependency manager that is similar to Renovate. Dependabot is built to be simple to use and the trade off is therefore, it does not provide the same amount of configuration as Renovate does. Another difference is that Dependabot does not include auto-merging which is a very useful feature. More about auto-merging will be discussed further into the tutorial. 
+Renovate is a dependency manager and its main use is to monitor all dependencies in a project and automatically update them according to your chosen preferences. For instance, Renovate bot will automatically create pull requests whenever dependencies need updating. Renovate supports a wealth of languages and is highly customizable. There are multiple options on how to set up and use Renovate. It is easily available if you are hosted at Github or Azure DevOps. For platforms such as Bitbucket Cloud, Bitbucket Server, Gitea and GitLab, Renovate can be used by self-hosting it. [Dependabot](https://dependabot.com/) is another dependency manager that is similar to Renovate. Dependabot is built to be simple to use and the trade off is therefore, it does not provide the same amount of configuration as Renovate does. Another difference is that Dependabot does not include auto-merging which is a very useful feature. More about auto-merging will be discussed further into the tutorial.
 
 This tutorial will provide a brief introduction to the tool and how to set up Renovate bot for an example node application hosted on Github.
 
@@ -24,15 +24,16 @@ To complete this tutorial you will need a Github account and a web-browser.
 ## Install Renovate
 
 3. Navigate to <https://github.com/apps/renovate> and click the Install button
-![](images/3.png)
+![](images/3.png).
 
 4. Set the repository to either "All repositories" or just select the fork.
 ![](images/4.png)
 
-5. Click Install
+5. Click Install.
 
-6. Click Activate now and sign in with Github
+6. Click Activate now and sign authorize with your Github account.
 ![](images/6a.png)
+   The optional part of this step is to complete the WhiteSource Renovate Registration and get access to the Renovate Dashboard. The Renovate Dashboard includes all jobs that are done by Renovatebot for each repository. Click on a job to view its details and corresponding logs.
 
 7. Go to your Fork
 
@@ -40,9 +41,46 @@ To complete this tutorial you will need a Github account and a web-browser.
 ![](images/8.png)<br/>
 It should look something like this:
 ![](images/8b.png)
-9. Read through the configuration summary and consult the official documentation. If there are anything you don't understand(https://docs.renovatebot.com/).
 
-10. Merge the pull request to enable Renovate on your Fork
+9. Read through the configuration summary in the pull request. This pull request includes the configuration file for Renovate named `renovate.json`. The default base configuration for all languages looks like this
+```
+{
+  "extends": [
+    "config:base"
+  ]
+}
+```
+were `config:base` is the is a configuration preset of the following presets.
+```
+{
+  "extends": [
+    ":separateMajorReleases",
+    ":combinePatchMinorReleases",
+    ":ignoreUnstable",
+    ":prImmediately",
+    ":semanticPrefixFixDepsChoreOthers",
+    ":updateNotScheduled",
+    ":automergeDisabled",
+    ":ignoreModulesAndTests",
+    ":autodetectPinVersions",
+    ":prHourlyLimit2",
+    ":prConcurrentLimit20",
+    "group:monorepos",
+    "group:recommended",
+    "helpers:disableTypesNodeMajor",
+    "workarounds:all"
+  ]
+}
+```
+Here is a short description for some of the configurations which the base configuration includes:
+  - `:prImmediately`: a pull request is created immediately after a branch is created
+  - `:ignoreUnstable`: only allow upgrade to unstable versions if the existing version is unstable
+  - `:ignoreModulesAndTests`: ignore `node_modules`, `bower_components`, `vendor` and various test/tests directories
+  - `:autodetectPinVersions`: autodetect whether to pin dependencies or maintain ranges
+  - `:automergeDisabled`: auto-merging feature disabled, only humans are allowed to merge pull requests
+More details about the default configuration presets are provided in the [Renovate documentation](https://docs.renovatebot.com/presets-default/).
+
+10. Merge the pull request to enable Renovate on your Fork.
 
 ## Configure Renovate
 
