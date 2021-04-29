@@ -115,13 +115,23 @@ More details about the default configuration presets are provided in the [Renova
   ]
 }
 ```
-This configuration is equivalent to the defaults with four exceptions:
-  - No limit on how many pull requests are created per per hour.
-  - No limit on how many pull requests are created concurrently.
-  - Does not disable automerge for the entire repository.
-  - Pins all dependency versions except peer dependencies.
+This configuration is equivalent to the defaults (see desciption in the pull named Configure renovate) with four exceptions:
+```
+":prHourlyLimitNone"
+```
+  - No limit on how many pull requests are created per per hour. The default is 2, which can cause large delays when confirming a new config if the limit has been hit.
+```
+":prConcurrentLimitNone"
+```
+  - No limit on how many pull requests are created concurrently. The deafult is 20, which would probably not cause any problems for this tutorial but might cause delays if you experiment on your own.
+ 
+  - Removing *":automergeDisabled"* allows for enabling automerge in the repo. This is necessary since we will configure automerge next.
+```
+":pinAllExceptPeerDependencies"
+```
+  - Pins all dependency versions except peer dependencies. This is recommended for Node and considered good practice
 
-This is to make ther tutorial run more smoothly. Pull requests will be made before any changes are made to the codebase.
+Pull requests will be made before any changes are made to the codebase.
 
 13. Wait for a couple of minutes and the check your pull requests for a request named "Pin dependencies"
 
@@ -129,6 +139,13 @@ This is to make ther tutorial run more smoothly. Pull requests will be made befo
 ![](images/14.png)
 
 15. Merge the pull request and check that all versions have been pinned.
+Example:
+```
+Unpinned                Pinned
+"express": "^4.17.0"    "express": "4.17.0"  
+```
+Pinnig, as opposed to using ranges, means that npm will use exactly ther version of the library that is specified. Ranges are more flexible and can (but does not necessarily) use newer versions. Exactly how they work depends on what prefix is used, ^ will allow minor version-upgrade by npm.
+An advantage to pinning is that you can run tests before allowing even minor updates in production and you get more control of the environment.
 
 16. Next, we'll break the config on purpose while setting up auto merge for minor updates. We make the configuration invalid by adding this
 
@@ -254,4 +271,25 @@ The `renovate.json` file should look like this:
 
 ![](images/22.png)
 
+While enabling automerge have some risks, problematic updates can get merged, but it can also help reduce the amount of noise and make managing major upodates easier.
+You have to make a decision based on your circumstances, are the risks of a bad minor update worth reducing the amount pull requests?
+
 22. Explore the depths of configuration available at <https://docs.renovatebot.com/configuration-options/> at your own leisure.
+
+## Summary
+
+This tutorial go through:
+
+* Activating Renovate on you repo and activate the renovate dashboard
+* Pin and update your dependencies  
+* Change the deafult configuration to allow automatic merges of minor version
+* How to notice and fix an error in the configuration
+
+
+## Take home message
+
+Don't be afraid to experiment with configuration, but be prepared to exercise patience. 
+
+Allways test you configuration and confirm that it does what you mean for it to do.
+
+Never ***ever*** enable automerge without test in production.
