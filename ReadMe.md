@@ -1,35 +1,93 @@
 # Executable Renovate-tutorial
 
 ## Introduction
-Renovate is a dependency manager and its main use is to monitor all dependencies in a project and automatically update them according to your chosen preferences. For instance, Renovate bot will automatically create pull requests whenever dependencies need updating. Renovate supports a wealth of languages and is highly customizable. There are multiple options on how to set up and use Renovate. It is easily available if you are hosted at Github or Azure DevOps. For platforms such as Bitbucket Cloud, Bitbucket Server, Gitea and GitLab, Renovate can be used by self-hosting it.
+Renovate is a dependency manager and its main use is to monitor all dependencies in a project and automatically update them according to your chosen preferences. For instance, Renovate bot will automatically create pull requests whenever dependencies need updating. Renovate supports a wealth of languages and is highly customizable. There are multiple options on how to set up and use Renovate. It is easily available if you are hosted at Github or Azure DevOps. For platforms such as Bitbucket Cloud, Bitbucket Server, Gitea and GitLab, Renovate can be used by self-hosting it. [Dependabot](https://dependabot.com/) is another dependency manager that is similar to Renovate. Dependabot is built to be simple to use and the trade off is therefore, it does not provide the same amount of configuration as Renovate does. Another difference is that Dependabot does not include auto-merging which is a very useful feature. More about auto-merging will be discussed further into the tutorial.
 
-This tutorial will provide a brief introduction to the tool and how to set up Renovate bot for a simple node web application hosted at Github.
+This tutorial will provide a brief introduction to the tool and how to set up Renovate bot for an example node application hosted on Github.
+
+## Table of Contents
+- Preparation
+- Fork Example Application
+- Install Renovate
+- Configure Renovate
 
 ## Preparation
-To complete this tutorial you will only need a Github account and a web-browser.
+To complete this tutorial you will need a Github account and a web-browser.
 
-## Instructions
+## Fork Example Application
 
-1. Navigate to <https://github.com/Sebberh/GenericNode>
-2. Fork the repository
+1. The example project we are going to use is a simple web server that listens to clients that connect to <http://localhost:3000>. When a client connects to the server, then the server sends the message "Hello World!" as a response. The example project can be found here <https://github.com/Sebberh/GenericNode>. For more details about the example project, check its README. Moving on to the first step of this tutorial, navigate to <https://github.com/Sebberh/GenericNode>
+
+2. Fork the repository and enable issues on the fork.
 ![](images/2.png)
 
+## Install Renovate
+
 3. Navigate to <https://github.com/apps/renovate> and click the Install button
-![](images/3.png)
+![](images/3.png).
+
 4. Set the repository to either "All repositories" or just select the fork.
 ![](images/4.png)
-5. Click Install
-6. Click Activate now and sign in with Github
+
+5. Click Install.
+
+6. Click Activate now and sign authorize with your Github account.
 ![](images/6a.png)
+   The optional part of this step is to complete the WhiteSource Renovate Registration and get access to the Renovate Dashboard. The Renovate Dashboard includes all jobs that are done by Renovatebot for each repository. Click on a job to view its details and corresponding logs.
+
 7. Go to your Fork
 
 8. Go to Pull requests and open the pull request named Configure renovate
 ![](images/8.png)<br/>
 It should look something like this:
 ![](images/8b.png)
-9. Read through the configuration summary and consult the official documentation. If there are anything you don't understand(https://docs.renovatebot.com/).
 
-10. Merge the pull request to enable Renovate on your Fork
+9. Read through the configuration summary in the pull request. This pull request includes the configuration file for Renovate named `renovate.json`. The default base configuration for all languages looks like this
+
+```
+{
+  "extends": [
+    "config:base"
+  ]
+}
+```
+
+were `config:base` is the is a configuration preset of the following presets.
+
+```
+{
+  "extends": [
+    ":separateMajorReleases",
+    ":combinePatchMinorReleases",
+    ":ignoreUnstable",
+    ":prImmediately",
+    ":semanticPrefixFixDepsChoreOthers",
+    ":updateNotScheduled",
+    ":automergeDisabled",
+    ":ignoreModulesAndTests",
+    ":autodetectPinVersions",
+    ":prHourlyLimit2",
+    ":prConcurrentLimit20",
+    "group:monorepos",
+    "group:recommended",
+    "helpers:disableTypesNodeMajor",
+    "workarounds:all"
+  ]
+}
+```
+
+Here is a short description for some of the configurations which the base configuration includes:
+  - `:prImmediately`: a pull request is created immediately after a branch is created
+  - `:ignoreUnstable`: only allow upgrade to unstable versions if the existing version is unstable
+  - `:ignoreModulesAndTests`: ignore `node_modules`, `bower_components`, `vendor` and various test/tests directories
+  - `:autodetectPinVersions`: autodetect whether to pin dependencies or maintain ranges
+  - `:automergeDisabled`: auto-merging feature disabled, only humans are allowed to merge pull requests
+More details about the default configuration presets are provided in the [Renovate documentation](https://docs.renovatebot.com/presets-default/).
+
+10. Merge the pull request to enable Renovate on your Fork. Wait a minute and a pull request will be created for updating the `node` dependency, merge the pull request to update the dependency.
+![](/images/10.png)
+
+## Configure Renovate and Enable Auto-merging
 
 11. Navigate to the project-files and open renovate.json.
 
@@ -52,7 +110,7 @@ It should look something like this:
     "group:recommended",
     "helpers:disableTypesNodeMajor",
     "workarounds:all",
-    
+
     ":pinAllExceptPeerDependencies"
   ]
 }
@@ -78,7 +136,7 @@ Pull requests will be made before any changes are made to the codebase.
 13. Wait for a couple of minutes and the check your pull requests for a request named "Pin dependencies"
 
 14. Open the pull request, it should look something like this:
-![](images/16.png)
+![](images/14.png)
 
 15. Merge the pull request and check that all versions have been pinned.
 Example:
@@ -89,9 +147,19 @@ Unpinned                Pinned
 Pinnig, as opposed to using ranges, means that npm will use exactly ther version of the library that is specified. Ranges are more flexible and can (but does not necessarily) use newer versions. Exactly how they work depends on what prefix is used, ^ will allow minor version-upgrade by npm.
 An advantage to pinning is that you can run tests before allowing even minor updates in production and you get more control of the environment.
 
+16. Next, we'll break the config on purpose while setting up auto merge for minor updates. We make the configuration invalid by adding this
 
-16. Now we'll break the config on purpose while setting up auto merge for minor updates. Overwrite the renovate.json with the following:
+```
+"packageRules": [
+  {
+    "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+    "requiredStatusChecks": null,
+    "automerge": true
+  }
+]
+```
 
+to `renovate.json` within `extends`, the result should look like this:
 
 ```
 {
@@ -110,28 +178,42 @@ An advantage to pinning is that you can run tests before allowing even minor upd
     "group:recommended",
     "helpers:disableTypesNodeMajor",
     "workarounds:all",
-    
+
     ":pinAllExceptPeerDependencies",
 
     "packageRules": [
-    {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "requiredStatusChecks": null,
-      "automerge": true
-    }
+      {
+        "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+        "requiredStatusChecks": null,
+        "automerge": true
+      }
+    ]
   ]
-  ]
-    
- 
+
+
 }
 ```
+This configuration is invalid because the `packageRules` is not a valid object within `extends`.
 
 17. Check your Issues and see that Renovate have created an issue stating that the config is broken, including an error-message. It should look something like this:
 ![](images/19.png)
 
 
-18. Overwrite the renovate.json again with the following:
+18. To enable auto-merging of pull requests created by renovate, move the `packageRules` object out of `èxtends` and as a separate object in the configuration.
 
+```
+"packageRules": [
+  {
+    "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+    "requiredStatusChecks": null,
+    "automerge": true
+  }
+]
+```
+
+The added package rule enables auto-merging for the repository. `matchUpdateTypes` defines which type of dependency updates auto-merging should be applied on, in this configuration auto-merging is performed when detecting minor dependency updates, updates for pinned dependencies, patches and updates for dependencies with no change/tag (digest). Note that `"requiredStatusChecks": null` disables the requirement of a successful run of the CI pipeline. This is disabled for the purpose of demonstration in this tutorial and the fact that the example project does not have a CI pipeline set up. In practice, it would be very reasonable to require a successful run of the CI pipeline before auto-merging.
+
+The `renovate.json` file should look like this:
 
 ```
 {
@@ -160,14 +242,13 @@ An advantage to pinning is that you can run tests before allowing even minor upd
     }
   ]
 }
-
 ```
+
 19. Check the issue again and see that the bot has closed it automatically.
 
 20. Open package.json and change the version of express to 4.17.0. The file should look something like this:
 
 ```
-
 {
   "dependencies": {
     "express": "4.17.0",
