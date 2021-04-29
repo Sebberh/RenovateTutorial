@@ -86,7 +86,7 @@ More details about the default configuration presets are provided in the [Renova
 
 10. Merge the pull request to enable Renovate on your Fork.
 
-## Configure Renovate
+## Configure Renovate and Enable Auto-merging
 
 11. Navigate to the project-files and open renovate.json.
 
@@ -181,7 +181,21 @@ This configuration is invalid because the `packageRules` is not a valid object w
 ![](images/19.png)
 
 
-18. Overwrite the renovate.json again with the following:
+18. To enable auto-merging of pull requests created by renovate, move the `packageRules` object out of `èxtends` and as a separate object in the configuration.
+
+```
+"packageRules": [
+  {
+    "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+    "requiredStatusChecks": null,
+    "automerge": true
+  }
+]
+```
+
+The added package rule enables auto-merging for the repository. `matchUpdateTypes` defines which type of dependency updates auto-merging should be applied on, in this configuration auto-merging is performed when detecting minor dependency updates, updates for pinned dependencies, patches and updates for dependencies with no change/tag (digest). Note that `"requiredStatusChecks": null` disables the requirement of a successful run of the CI pipeline. This is disabled for the purpose of demonstration in this tutorial and the fact that the example project does not have a CI pipeline set up. In practice, it would be very reasonable to require a successful run of the CI pipeline before auto-merging. 
+
+The `renovate.json` file should look like this:
 
 ```
 {
@@ -211,12 +225,12 @@ This configuration is invalid because the `packageRules` is not a valid object w
   ]
 }
 ```
+
 19. Check the issue again and see that the bot has closed it automatically.
 
 20. Open package.json and change the version of express to 4.17.0. The file should look something like this:
 
 ```
-
 {
   "dependencies": {
     "express": "4.17.0",
