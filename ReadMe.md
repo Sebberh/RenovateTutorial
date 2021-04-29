@@ -1,9 +1,9 @@
 # Executable Renovate-tutorial
 
 ## Introduction
-Renovate is a dependency manager and its main use is to monitor all dependencies in a project and automatically update them according to your chosen preferences. For instance, Renovate bot will automatically create pull requests whenever dependencies need updating. Renovate supports a wealth of languages and is highly customizable. There are multiple options on how to set up and use Renovate. It is easily available if you are hosted at Github or Azure DevOps. For platforms such as Bitbucket Cloud, Bitbucket Server, Gitea and GitLab, Renovate can be used by self-hosting it.
+Renovate is a dependency manager and its main use is to monitor all dependencies in a project and automatically update them according to your chosen preferences. For instance, Renovate bot will automatically create pull requests whenever dependencies need updating. Renovate supports a wealth of languages and is highly customizable. There are multiple options on how to set up and use Renovate. It is easily available if you are hosted at Github or Azure DevOps. For platforms such as Bitbucket Cloud, Bitbucket Server, Gitea and GitLab, Renovate can be used by self-hosting it. [Dependabot](https://dependabot.com/) is another dependency manager that is similar to Renovate. Dependabot is built to be simple to use and the trade off is therefore, it does not provide the same amount of configuration as Renovate does. Another difference is that Dependabot does not include auto-merging which is a very useful feature. More about auto-merging will be discussed further into the tutorial. 
 
-This tutorial will provide a breif introduction to the tool and how to set up Renovate bot for an example node application hosted on Github.
+This tutorial will provide a brief introduction to the tool and how to set up Renovate bot for an example node application hosted on Github.
 
 ## Table of Contents
 - Preparation
@@ -26,7 +26,7 @@ To complete this tutorial you will need a Github account and a web-browser.
 3. Navigate to <https://github.com/apps/renovate> and click the Install button
 ![](images/3.png)
 
-4. Set repository to either "All repositories" or just select the fork.
+4. Set the repository to either "All repositories" or just select the fork.
 ![](images/4.png)
 
 5. Click Install
