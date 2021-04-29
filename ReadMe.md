@@ -43,6 +43,7 @@ It should look something like this:
 ![](images/8b.png)
 
 9. Read through the configuration summary in the pull request. This pull request includes the configuration file for Renovate named `renovate.json`. The default base configuration for all languages looks like this
+
 ```
 {
   "extends": [
@@ -50,7 +51,9 @@ It should look something like this:
   ]
 }
 ```
+
 were `config:base` is the is a configuration preset of the following presets.
+
 ```
 {
   "extends": [
@@ -72,6 +75,7 @@ were `config:base` is the is a configuration preset of the following presets.
   ]
 }
 ```
+
 Here is a short description for some of the configurations which the base configuration includes:
   - `:prImmediately`: a pull request is created immediately after a branch is created
   - `:ignoreUnstable`: only allow upgrade to unstable versions if the existing version is unstable
@@ -125,10 +129,19 @@ This is to make ther tutorial run more smoothly. Pull requests will be made befo
 
 15. Merge the pull request and check that all versions have been pinned.
 
-Next, we'll break the config on purpose while setting up auto merge for minor updates.
+16. Next, we'll break the config on purpose while setting up auto merge for minor updates. We make the configuration invalid by adding this
 
-16. Overwrite the renovate.json with the following:
+```
+"packageRules": [
+  {
+    "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+    "requiredStatusChecks": null,
+    "automerge": true
+  }
+]
+```
 
+to `renovate.json` within `extends`, the result should look like this:
 
 ```
 {
@@ -151,24 +164,24 @@ Next, we'll break the config on purpose while setting up auto merge for minor up
     ":pinAllExceptPeerDependencies",
 
     "packageRules": [
-    {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "requiredStatusChecks": null,
-      "automerge": true
-    }
-  ]
+      {
+        "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+        "requiredStatusChecks": null,
+        "automerge": true
+      }
+    ]
   ]
 
 
 }
 ```
+This configuration is invalid because the `packageRules` is not a valid object within `extends`.
 
 17. Check your Issues and see that Renovate have created an issue stating that the config is broken, including an error-message. It should look something like this:
 ![](images/19.png)
 
 
 18. Overwrite the renovate.json again with the following:
-
 
 ```
 {
@@ -197,7 +210,6 @@ Next, we'll break the config on purpose while setting up auto merge for minor up
     }
   ]
 }
-
 ```
 19. Check the issue again and see that the bot has closed it automatically.
 
