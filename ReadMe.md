@@ -6,8 +6,10 @@ Renovate is a dependency manager and its main use is to monitor all dependencies
 This tutorial will provide a breif introduction to the tool and how to set up Renovate bot for an example node application hosted on Github.
 
 ## Table of Contents
-1. Preparation
-2. Instructions
+- Preparation
+- Fork Example Application
+- Install Renovate
+- Configure Renovate
 
 ## Preparation
 To complete this tutorial you will need a Github account and a web-browser.
