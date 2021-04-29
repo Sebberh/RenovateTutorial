@@ -57,11 +57,11 @@ It should look something like this:
   ]
 }
 ```
-This configuration is equivalent to the defaults with four exceptions:
+This configuration is equivalent to the defaults (see desciption in the pull named Configure renovate) with four exceptions:
 ```
-":prHourlyLimitNone" 
+":prHourlyLimitNone"
 ```
-  - No limit on how many pull requests are created per per hour. The deafult is 2, which can cause large delays when confirming a new config if the limimt has been hit.
+  - No limit on how many pull requests are created per per hour. The default is 2, which can cause large delays when confirming a new config if the limit has been hit.
 ```
 ":prConcurrentLimitNone"
 ```
@@ -71,9 +71,9 @@ This configuration is equivalent to the defaults with four exceptions:
 ```
 ":pinAllExceptPeerDependencies"
 ```
-  - Pins all dependency versions except peer dependencies. This is recommended for Node adn considered good practice
+  - Pins all dependency versions except peer dependencies. This is recommended for Node and considered good practice
 
-This is to make ther tutorial run more smoothly. Pull requests will be made before any changes are made to the codebase.
+Pull requests will be made before any changes are made to the codebase.
 
 13. Wait for a couple of minutes and the check your pull requests for a request named "Pin dependencies"
 
