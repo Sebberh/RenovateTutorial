@@ -81,10 +81,16 @@ Pull requests will be made before any changes are made to the codebase.
 ![](images/16.png)
 
 15. Merge the pull request and check that all versions have been pinned.
+Example:
+```
+Unpinned                Pinned
+"express": "^4.17.0"    "express": "4.17.0"  
+```
+Pinnig, as opposed to using ranges, means that npm will use exactly ther version of the library that is specified. Ranges are more flexible and can (but does not necessarily) use newer versions. Exactly how they work depends on what prefix is used, ^ will allow minor version-upgrade by npm.
+An advantage to pinning is that you can run tests before allowing even minor updates in production and you get more control of the environment.
 
-Next, we'll break the config on purpose while setting up auto merge for minor updates.
 
-16. Overwrite the renovate.json with the following:
+16. Now we'll break the config on purpose while setting up auto merge for minor updates. Overwrite the renovate.json with the following:
 
 
 ```
