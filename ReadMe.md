@@ -190,6 +190,9 @@ An advantage to pinning is that you can run tests before allowing even minor upd
 
 ![](images/22.png)
 
+While enabling automerge have some risks, problematic updates can get merged, but it can also help reduce the amount of noise and make managing major easier.
+You have to make a decision based on your circumstances, are the risks of a bad minor update worth reducing the amount pull requests?
+
 22. Explore the depths of configuration available at <https://docs.renovatebot.com/configuration-options/> at your own leisure.
 
 ## Summary
@@ -207,3 +210,5 @@ This tutorial go through:
 Don't be afraid to experiment with configuration, but be prepared to exercise patience. 
 
 Allways test you configuration and confirm that it does what you mean for it to do.
+
+Never ***ever*** enable automerge without test in production.
