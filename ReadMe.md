@@ -12,12 +12,14 @@ This tutorial will provide a breif introduction to the tool and how to set up Re
 ## Preparation
 To complete this tutorial you will need a Github account and a web-browser.
 
-## Instructions
+## Fork Example Application
 
 1. The example project we are going to use is a simple web server that listens to clients that connect to <http://localhost:3000>. When a client connects to the server, then the server sends the message "Hello World!" as a response. The example project can be found here <https://github.com/Sebberh/GenericNode>. For more details about the example project, check its README. Moving on to the first step of this tutorial, navigate to <https://github.com/Sebberh/GenericNode>
 
-2. Fork the repository
+2. Fork the repository and enable issues on the fork.
 ![](images/2.png)
+
+## Install Renovate
 
 3. Navigate to <https://github.com/apps/renovate> and click the Install button
 ![](images/3.png)
@@ -39,6 +41,8 @@ It should look something like this:
 9. Read through the configuration summary and consult the official documentation. If there are anything you don't understand(https://docs.renovatebot.com/).
 
 10. Merge the pull request to enable Renovate on your Fork
+
+## Configure Renovate
 
 11. Navigate to the project-files and open renovate.json.
 
