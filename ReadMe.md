@@ -84,7 +84,8 @@ Here is a short description for some of the configurations which the base config
   - `:automergeDisabled`: auto-merging feature disabled, only humans are allowed to merge pull requests
 More details about the default configuration presets are provided in the [Renovate documentation](https://docs.renovatebot.com/presets-default/).
 
-10. Merge the pull request to enable Renovate on your Fork.
+10. Merge the pull request to enable Renovate on your Fork. Wait a minute and a pull request will be created for updating the `node` dependency, merge the pull request to update the dependency.
+![](/images/10.png)
 
 ## Configure Renovate and Enable Auto-merging
 
@@ -125,7 +126,7 @@ This is to make ther tutorial run more smoothly. Pull requests will be made befo
 13. Wait for a couple of minutes and the check your pull requests for a request named "Pin dependencies"
 
 14. Open the pull request, it should look something like this:
-![](images/16.png)
+![](images/14.png)
 
 15. Merge the pull request and check that all versions have been pinned.
 
@@ -193,7 +194,7 @@ This configuration is invalid because the `packageRules` is not a valid object w
 ]
 ```
 
-The added package rule enables auto-merging for the repository. `matchUpdateTypes` defines which type of dependency updates auto-merging should be applied on, in this configuration auto-merging is performed when detecting minor dependency updates, updates for pinned dependencies, patches and updates for dependencies with no change/tag (digest). Note that `"requiredStatusChecks": null` disables the requirement of a successful run of the CI pipeline. This is disabled for the purpose of demonstration in this tutorial and the fact that the example project does not have a CI pipeline set up. In practice, it would be very reasonable to require a successful run of the CI pipeline before auto-merging. 
+The added package rule enables auto-merging for the repository. `matchUpdateTypes` defines which type of dependency updates auto-merging should be applied on, in this configuration auto-merging is performed when detecting minor dependency updates, updates for pinned dependencies, patches and updates for dependencies with no change/tag (digest). Note that `"requiredStatusChecks": null` disables the requirement of a successful run of the CI pipeline. This is disabled for the purpose of demonstration in this tutorial and the fact that the example project does not have a CI pipeline set up. In practice, it would be very reasonable to require a successful run of the CI pipeline before auto-merging.
 
 The `renovate.json` file should look like this:
 
