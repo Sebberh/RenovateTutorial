@@ -176,4 +176,18 @@ Next, we'll break the config on purpose while setting up auto merge for minor up
 
 22. Explore the depths of configuration available at <https://docs.renovatebot.com/configuration-options/> at your own leisure.
 
+## Summary
 
+This tutorial go through:
+
+* Activating Renovate on you repo and activate the renovate dashboard
+* Pin and update your dependencies  
+* Change the deafult configuration to allow automatic merges of minor version
+* How to notice and fix an error in the configuration
+
+
+## Take home message
+
+Don't be afraid to experiment with configuration, but be prepared to exercise patience. 
+
+Allways test you configuration and confirm that it does what you mean for it to do.
