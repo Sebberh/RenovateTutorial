@@ -58,10 +58,20 @@ It should look something like this:
 }
 ```
 This configuration is equivalent to the defaults with four exceptions:
-  - No limit on how many pull requests are created per per hour.
-  - No limit on how many pull requests are created concurrently.
-  - Does not disable automerge for the entire repository.
-  - Pins all dependency versions except peer dependencies.
+```
+":prHourlyLimitNone" 
+```
+  - No limit on how many pull requests are created per per hour. The deafult is 2, which can cause large delays when confirming a new config if the limimt has been hit.
+```
+":prConcurrentLimitNone"
+```
+  - No limit on how many pull requests are created concurrently. The deafult is 20, which would probably not cause any problems for this tutorial but might cause delays if you experiment on your own.
+ 
+  - Removing *":automergeDisabled"* allows for enabling automerge in the repo. This is necessary since we will configure automerge next.
+```
+":pinAllExceptPeerDependencies"
+```
+  - Pins all dependency versions except peer dependencies. This is recommended for Node adn considered good practice
 
 This is to make ther tutorial run more smoothly. Pull requests will be made before any changes are made to the codebase.
 
